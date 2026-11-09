@@ -119,8 +119,8 @@ def define_oplus_ddk_module(
         else:
             local_defines = flattened_conditional_defines
 
-            # drop soc deps a module already lists (ko_deps/header_deps may be a select(): only lists are checked)
-            soc_deps = [d for d in soc_modules(["qcom-scm", "smem"]) if (type(header_deps) != "list" or d not in header_deps) and (type(ko_deps) != "list" or d not in ko_deps)]
+    # drop soc deps a module already lists (ko_deps/header_deps may be a select(): only lists are checked)
+    soc_deps = [d for d in soc_modules(["qcom-scm", "smem"]) if (type(header_deps) != "list" or d not in header_deps) and (type(ko_deps) != "list" or d not in ko_deps)]
     for target in bazel_support_target:
         for variant in bazel_support_variant:
             ddk_module(

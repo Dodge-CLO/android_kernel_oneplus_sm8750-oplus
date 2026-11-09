@@ -1,5 +1,6 @@
 load("//build/kernel/kleaf:kernel.bzl", "ddk_module")
 load("//msm-kernel:target_variants.bzl", "get_all_la_variants")
+load("//msm-kernel:soc_modules.bzl", "soc_modules")
 load(":oplus_modules_variant.bzl",
     "bazel_support_target",
     "bazel_support_variant",
@@ -130,8 +131,9 @@ def define_oplus_ddk_module(
                 conditional_srcs = conditional_srcs,
                 linux_includes = linux_includes,
                 hdrs = hdrs,
-                deps = ["//msm-kernel:all_headers"] + header_deps + ko_deps,
+                deps = ["//msm-kernel:all_headers"] + header_deps + ko_deps + soc_modules(),
                 kernel_build = "//msm-kernel:{}_{}".format(target,variant),
+                config = None if kconfig else "//msm-kernel:{}_{}_config".format(target,variant),
                 kconfig = kconfig,
                 defconfig = defconfig,
                 visibility = ["//visibility:public"],

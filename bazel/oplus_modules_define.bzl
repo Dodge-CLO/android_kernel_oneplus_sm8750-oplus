@@ -131,7 +131,7 @@ def define_oplus_ddk_module(
                 conditional_srcs = conditional_srcs,
                 linux_includes = linux_includes,
                 hdrs = hdrs,
-                deps = ["//msm-kernel:all_headers"] + header_deps + ko_deps + soc_modules(["panel_event_notifier", "qcom-scm", "smem"]),
+                deps = {d: None for d in ["//msm-kernel:all_headers"] + header_deps + ko_deps + soc_modules(["panel_event_notifier", "qcom-scm", "smem"])}.keys(),
                 kernel_build = "//msm-kernel:{}_{}".format(target,variant),
                 kconfig = kconfig,
                 defconfig = defconfig,
